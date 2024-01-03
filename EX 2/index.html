@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Details</title>
+  <script>
+    // Open a database connection
+    var db = openDatabase('StudentDB', '1.0', 'Student Database', 2 * 1024 * 1024);
+
+    // Create a table to store student details
+    db.transaction(function(tx) {
+      tx.executeSql('CREATE TABLE IF NOT EXISTS students (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER)');
+    });
+
+    // Function to add a new student
+    function addStudent() {
+      var name = document.getElementById('name').value;
+      var age = document.getElementById('age').value;
+
+      db.transaction(function(tx) {
+        tx.executeSql('INSERT INTO students (name, age) VALUES (?, ?)', [name, age]);
+      });
+
+      // Clear the input fields
+      document.getElementById('name').value = '';
+      document.getElementById('age').value = '';
+    }
+
+    // Function to display all students
+    function displayStudents() {
+      db.transaction(function(tx) {
+        tx.executeSql('SELECT * FROM students', [], function(tx, results) {
+          var table = document.getElementById('studentTable');
+          table.innerHTML = '';
+
+          for (var i = 0; i < results.rows.length; i++) {
+            var row = table.insertRow(i);
+            var idCell = row.insertCell(0);
+            var nameCell = row.insertCell(1);
+            var ageCell = row.insertCell(2);
+
+            idCell.innerHTML = results.rows.item(i).id;
+            nameCell.innerHTML = results.rows.item(i).name;
+            ageCell.innerHTML = results.rows.item(i).age;
+          }
+        });
+      });
+    }
+  </script>
+</head>
+<body>
+  <h1>Student Details</h1>
+
+  <form>
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" required>
+
+    <button type="button" onclick="addStudent()">Add Student</button>
+  </form>
+
+  <h2>All Students</h2>
+
+  <table id="studentTable">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Age</th>
+    </tr>
+  </table>
+
+  <button type="button" onclick="displayStudents()">Display Students</button>
+</body>
+</html>
