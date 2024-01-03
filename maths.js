@@ -1,7 +1,5 @@
-// Define variables
 let a = 5;
 let b = 3;
-// Arithmetic operations
 let sum = a + b;
 let difference = a - b;
 let product = a * b;
@@ -12,8 +10,7 @@ console.log("Difference:", difference);
 console.log("Product:", product);
 console.log("Quotient:", quotient);
 console.log("Remainder:", remainder);
-// Mathematical calculations
-let angle = 45; // degrees
+let angle = 45; 
 let radians = angle * (Math.PI / 180);
 let sineValue = Math.sin(radians);
 let power = Math.pow(2, 3);
