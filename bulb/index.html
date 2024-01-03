@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bulb On/Off</title> </head>
+<body>
+  <h2>Bulb Turn On/Off</h2>
+  <p>Look at the image:</p>
+  <button type="button" id="turnOnButton">Turn On</button>
+  <img id="bulbImage" src="https://static.vecteezy.com/system/resources/previews/019/513/308/original/light-bulb-or-idea-and-inspiration-simple-icon-electric-light-energy-concept-vector.jpg" width="100" height="180">
+  <button type="button" id="turnOffButton">Turn Off</button>
+
+  <script>
+    // Use event listeners for better separation of concerns
+    document.getElementById('turnOnButton').addEventListener('click', function() {
+      document.getElementById('bulbImage').src = 'https://as2.ftcdn.net/v2/jpg/02/23/13/17/1000_F_223131737_22YCcyWqdvoYWkyKqgE5QVvEV3LxDEZ5.jpg';
+    });
+
+    document.getElementById('turnOffButton').addEventListener('click', function() {
+      document.getElementById('bulbImage').src = 'https://static.vecteezy.com/system/resources/previews/019/513/308/original/light-bulb-or-idea-and-inspiration-simple-icon-electric-light-energy-concept-vector.jpg';
+    });
+  </script>
+</body>
+</html>
